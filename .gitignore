@@ -1,0 +1,14 @@
+/.bundle/
+/.yardoc
+/Gemfile*.lock
+/_yardoc/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/vendor
+*.bundle
+*.so
+*.o
+*.a
+mkmf.log
