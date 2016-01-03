@@ -21,6 +21,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'usmu', '~> 1.0'
   spec.add_dependency 'logging', '~> 2.0'
+  # Allow dev versions because rugged is broke on Windows at the moment...
+  # https://github.com/libgit2/rugged/pull/557
+  spec.add_dependency 'rugged', '~> 0.24.0b'
 
   spec.add_development_dependency 'bundler', '~> 1.6'
   spec.add_development_dependency 'rake', '~> 10.0'
