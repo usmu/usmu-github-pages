@@ -1,8 +1,8 @@
 %w{
   shellwords
   uri
-  usmu/github/pages/configuration
   usmu/github/pages/version
+  usmu/github/pages/configuration
 }.each {|f| require f }
 
 module Usmu
