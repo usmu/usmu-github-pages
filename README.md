@@ -1,6 +1,6 @@
 # usmu-github-pages
 
-[![Build Status](https://travis-ci.org/usmu/usmu-github-pages.svg?branch=master)](https://travis-ci.org/usmu/usmu-github-pages)
+[![Circle CI](https://circleci.com/gh/usmu/usmu-github-pages/tree/master.svg?style=svg)](https://circleci.com/gh/usmu/usmu-github-pages/tree/master)
 [![Dependency Status](https://gemnasium.com/usmu/usmu-github-pages.svg)](https://gemnasium.com/usmu/usmu-github-pages)
 [![Code Climate](https://codeclimate.com/github/usmu/usmu-github-pages/badges/gpa.svg)](https://codeclimate.com/github/usmu/usmu-github-pages)
 

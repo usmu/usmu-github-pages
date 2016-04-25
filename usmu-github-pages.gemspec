@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = Gem::Requirement.new('>= 2.2.0')
 
-  spec.add_dependency 'usmu', '~> 1.4'
+  spec.add_dependency 'usmu', '~> 1.4', '>= 1.4.3'
   spec.add_dependency 'logging', '~> 2.0'
 
   spec.add_development_dependency 'bundler', '~> 1.6'
