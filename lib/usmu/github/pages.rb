@@ -96,6 +96,13 @@ module Usmu
         branch = config['branch', default: config.default_branch(remote)]
         destination = @ui.configuration.destination_path
 
+        # Ensure we're deploying a complete commit.
+        sha = `git rev-parse HEAD`.chomp[0, 7]
+        unless `git diff HEAD --name-only`.lines.count == 0
+          @log.fatal("Found unsaved changes in your git repository. Please commit these changes and try again.")
+          exit 1
+        end
+
         # Ensure clean worktree.
         @log.info("Cleaning output directory.")
         Dir.chdir destination do
@@ -106,20 +113,30 @@ module Usmu
         # Regenerate site.
         Usmu.plugins[Usmu::Plugin::Core].command_generate({}, options)
 
-        # Commit results.
-        `git add . 2>&1`
-        if `git diff HEAD --name-only`.lines.count > 0
-          @log.info "Detected no changes - deploy aborted."
-          exit 0
-        end
-        `git commit -a -m "Update created by usmu-github-pages." 2>&1`
-        if $?.exitstatus != 0
-          @log.fatal "Unable to create a new commit. Please check the destination folder for more information."
-          exit 1
+        Dir.chdir destination do
+          # Commit results.
+          `git add . 2>&1`
+          if `git diff HEAD --name-only`.lines.count == 0
+            @log.info "Detected no changes - deploy aborted."
+            exit 0
+          end
+          `git commit -a -m "Update created by usmu-github-pages from revision #{sha}." 2>&1`
+          if $?.exitstatus != 0
+            @log.fatal "Unable to create a new commit. Please check the destination folder for more information."
+            exit 1
+          end
+
+          # Push branch to remote.
+          @log.info("Deploying to Github...")
+          `git push #{Shellwords.escape remote} #{Shellwords.escape branch} 2>&1`
         end
 
-        # Push branch to remote.
-        # `git push #{Shellwords.escape remote} #{Shellwords.escape branch} 2>&1`
+        cname_file = File.expand_path('./CNAME', destination)
+        if File.exist? cname_file
+          @log.success("Your site should be available shortly at http://#{File.read(cname_file).chomp}/")
+        else
+          @log.success("Deploy completed successfully.")
+        end
       end
     end
   end
