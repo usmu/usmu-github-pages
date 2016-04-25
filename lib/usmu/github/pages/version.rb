@@ -3,7 +3,7 @@ module Usmu
   module Github
     class Pages
       # The current version string for the gem
-      VERSION = '1.0.0.dev'
+      VERSION = '1.0.0'
     end
   end
 end
