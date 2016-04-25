@@ -29,11 +29,23 @@ Usmu will automatically detect any plugins available and automatically make them
 
 ## Configuration
 
-TODO: write this.
+    $ usmu gh-pages init
+
+This plugin also supports a few keys in `usmu.yml`:
+
+    plugins:
+      github-pages:
+        # The remote to deploy to. Change this if github is not your origin
+        # remote.
+        remote: origin
+        # The branch to deploy to. This should get correctly configured
+        # automatically in all cases involving Github but is provided just in
+        # case you need to change it or you are using another git-based host.
+        branch: gh-pages
 
 ## Usage
 
-TODO: write this.
+    $ usmu gh-pages deploy
 
   [gh-contrib]: https://github.com/usmu/usmu-github-pages/graphs/contributors
   [gh-issues]: https://github.com/usmu/usmu-github-pages/issues
