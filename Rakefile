@@ -76,7 +76,7 @@ task :changelog, :since_c, :until_c do |_, args|
   changelog_content = "\#\# #{Usmu::Github::Pages::VERSION}\n\n"
 
   cmd.lines.each do |entry|
-    date, author, subject, hash = entry.chomp.split('::::')
+    _date, author, subject, hash = entry.chomp.split('::::')
     entries[author] = Array.new unless entries[author]
     entries[author] << "#{subject} (#{hash})" unless subject =~ /Merge/
   end
