@@ -16,7 +16,7 @@ desc 'Run all test scripts'
 task :test => [:clean, :spec, :mutant]
 
 desc 'Run mutation tests'
-task :mutant, [:target] => [:clean] do |t,args|
+task :mutant, [:target] => [:clean] do |_, args|
   old = ENV.delete('CODECLIMATE_REPO_TOKEN')
   if `which mutant 2>&1 > /dev/null; echo \$?`.to_i != 0
     puts 'Mutant isn\'t supported on your platform. Please run these tests on MRI <= 2.1.5.'
@@ -67,7 +67,7 @@ end
 
 # (mostly) borrowed from: https://gist.github.com/mcansky/802396
 desc 'generate changelog with nice clean output'
-task :changelog, :since_c, :until_c do |t,args|
+task :changelog, :since_c, :until_c do |_, args|
   since_c = args[:since_c] || `git tag | egrep '^[0-9]+\\.[0-9]+\\.[0-9]+\$' | sort -Vr | head -n 1`.chomp
   until_c = args[:until_c]
   cmd=`git log --pretty="format:%ci::::%an <%ae>::::%s::::%H" #{since_c}..#{until_c}`
@@ -78,14 +78,13 @@ task :changelog, :since_c, :until_c do |t,args|
   cmd.lines.each do |entry|
     date, author, subject, hash = entry.chomp.split('::::')
     entries[author] = Array.new unless entries[author]
-    day = date.split(' ').first
     entries[author] << "#{subject} (#{hash})" unless subject =~ /Merge/
   end
 
   # generate clean output
   entries.keys.each do |author|
     changelog_content += author + "\n\n"
-    entries[author].reverse.each { |entry| changelog_content += "* #{entry}\n" }
+    entries[author].reverse_each { |entry| changelog_content += "* #{entry}\n" }
   end
 
   puts changelog_content
