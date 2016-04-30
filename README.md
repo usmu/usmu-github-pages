@@ -4,7 +4,7 @@
 [![Dependency Status](https://gemnasium.com/usmu/usmu-github-pages.svg)](https://gemnasium.com/usmu/usmu-github-pages)
 [![Code Climate](https://codeclimate.com/github/usmu/usmu-github-pages/badges/gpa.svg)](https://codeclimate.com/github/usmu/usmu-github-pages)
 
-**Source:** [https://github.com/usmu/usmu-github-pages](https://github.com/usmu/usmu-github-pages)
+**Source:** [https://github.com/usmu/usmu-github-pages](https://github.com/usmu/usmu-github-pages)  
 **Author:** Matthew Scharley  
 **Contributors:** [See contributors on GitHub][gh-contrib]  
 **Bugs/Support:** [Github Issues][gh-issues]  
